@@ -5,7 +5,9 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
-    // flexShrink: 0,
+    [theme.breakpoints.down('md')]: {
+      width: 0,
+    }
   },
   drawerPaper: {
     width: drawerWidth,

@@ -3,14 +3,14 @@ import { Grid, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
-import { Navbar, NavbarItem } from "../components/navbar";
+import AppBar from "../components/appbar";
 import Content from "../components/content";
 import FormField from "../components/formField";
 
 export const Form = () => {
   return (
     <>
-      <Navbar title="Form Example" />
+      <AppBar title="Form Example" />
       <Content>
         <form noValidate autoComplete="off">
           <Typography variant="overline">Form Title</Typography>
