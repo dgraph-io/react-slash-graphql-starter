@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client'
 
 import Content from '../components/content';
-import { Navbar, NavbarItem } from '../components/navbar';
+import AppBar from "../components/appbar";
 import { CenteredCard } from '../components/card';
 import { Search } from "../components/search";
 
@@ -25,11 +25,7 @@ const Home = () => {
   }
 
   return <>
-    <Navbar title="Home" color="primary">
-      <NavbarItem type='icon' iconName='search.svg' oncClick={() => { }} />
-      <NavbarItem type='icon' iconName='user.svg' oncClick={() => { }} />
-      <NavbarItem type='icon' iconName='settings.svg' oncClick={() => { }} />
-    </Navbar>
+    <AppBar title="Home" color="primary" />
     <Content>
       <Typography>
         This is the Slash GraphQL Starter App. If you are looking for where to get started, you

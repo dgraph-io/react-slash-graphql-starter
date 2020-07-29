@@ -1,18 +1,17 @@
 import React from "react";
 
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
+import { useTheme } from "@material-ui/core/styles";
 
-import SearchIcon from "@material-ui/icons/Search";
-import PersonIcon from "@material-ui/icons/Person";
-import SettingsApplicationsIcon from "@material-ui/icons/SettingsApplications";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import Collapse from "@material-ui/core/Collapse";
 
 import Logo from "../../assets/images/logo.svg";
 import useStyles from "./sidebar.style"
@@ -46,53 +45,63 @@ export const SidebarItem = ({ key, label, icon: Icon, open, className, onClick, 
   );
 }
 
-export const Sidebar = ({children = []}) => {
+export const Sidebar = ({children = [], mobileOpen, handleDrawerToggle}) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const theme = useTheme();
   const [openSubmenu, setOpenSubmenu] = React.useState({});
 
   const handleClick = (key) => {
     setOpenSubmenu({ ...openSubmenu, [key]: !openSubmenu[key] });
-    setOpen(true);
   };
 
-  return (
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.logo}>
-          <img src={Logo} alt="logo" />
-        </div>
-        <Divider />
-        {/* <div className={classes.sideBarIcons}>
-          <SearchIcon />
-          <PersonIcon />
-          <SettingsApplicationsIcon />
-        </div> */}
-        <Divider />
-        <List>
-          {children.map((child, index) => React.cloneElement(child, {
-            key: index,
-            open: openSubmenu[index] || false,
-            onClick: () => handleClick(index),
-          }))}
-        </List>
-        {/* <div className={clsx(classes.hideSidebar)}>
-          <IconButton onClick={handleDrawerOpen}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-            <ListItemText primary="Collapse menu" />
-          </IconButton>
-        </div> */}
-      </Drawer>
+  const drawer = (
+    <div>
+      <div className={classes.logo}>
+        <img src={Logo} alt="logo" />
+      </div>
+      <Divider />
+      <List>
+        {children.map((child, index) => React.cloneElement(child, {
+          key: index,
+          open: openSubmenu[index] || false,
+          onClick: () => handleClick(index),
+        }))}
+      </List>
+    </div>
   );
-};
+
+  return (
+    <div>
+      <div className={classes.drawer}>
+        <Hidden mdUp implementation="css">
+          <Drawer
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true 
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+
+        <Hidden mdDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </div>
+    </div>
+  );
+}

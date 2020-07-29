@@ -2,7 +2,7 @@ import React from "react";
 import {Typography, Grid} from '@material-ui/core';
 
 import Content from '../components/content';
-import { Navbar } from '../components/navbar';
+import AppBar from "../components/appbar";
 import { CenteredCard } from '../components/card';
 import { gql, useQuery } from '@apollo/client'
 
@@ -27,7 +27,7 @@ const Types = ({match}) => {
     variables: { typeId },
   });
   return <>
-    <Navbar title={`Type ${typeId}`} />
+    <AppBar title={`Type ${typeId}`} />
     <Content>
       <TypeDetails loading={loading} error={error} data={data} />
     </Content>

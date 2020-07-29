@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import { Typography } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import AppBar from "@material-ui/core/AppBar";
 
 import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import AppBar from "@material-ui/core/AppBar";
 
 import clsx from "clsx";
 import useStyles from "./navbar.style";
@@ -33,7 +33,7 @@ export function NavbarItem({type, href, onClick, text, iconName, width, height})
     )
 }
 
-export function Navbar({title, searchBar, children = [], color = "primary"}) {
+export function Navbar({title, searchBar, children = [], color = "primary", handleDrawerToggle}) {
   const classes = useStyles();
   const [closeBtn, setCloseBtn] = useState(false);
 
@@ -74,20 +74,18 @@ export function Navbar({title, searchBar, children = [], color = "primary"}) {
     <AppBar position="fixed" className={clsx(classes.appBar, classes.appBarShift)} color={color}>
       <div className={classes.nav} >
         <div className={classes.navLeft}>
+          <div className={classes.toggleBtn} onClick={handleDrawerToggle} >
+            <IconButton color="inherit">
+              {!closeBtn ? <MenuIcon /> : <CloseIcon />}
+            </IconButton>
+          </div>
           <Typography variant="h6">{title}</Typography>
           {getSearchBar("web")}
         </div>
 
         <div className={classes.navRight}>{getNavRightItems("web")}</div>
 
-        <div
-          className={classes.toggleBtn}
-          onClick={() => setCloseBtn(!closeBtn)}
-        >
-          <IconButton color="inherit">
-            {!closeBtn ? <MenuIcon /> : <CloseIcon />}
-          </IconButton>
-        </div>
+
       </div>
       {closeBtn ? (
         <div className={classes.navLinks}>
