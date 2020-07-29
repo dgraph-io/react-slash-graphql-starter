@@ -73,7 +73,7 @@ export const Sidebar = ({children = [], mobileOpen, handleDrawerToggle}) => {
   return (
     <div>
       <div className={classes.drawer}>
-        <Hidden mdUp implementation="css">
+        <Hidden smUp implementation="css">
           <Drawer
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
@@ -90,7 +90,7 @@ export const Sidebar = ({children = [], mobileOpen, handleDrawerToggle}) => {
           </Drawer>
         </Hidden>
 
-        <Hidden mdDown implementation="css">
+        <Hidden smDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper
