@@ -4,20 +4,25 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    [theme.breakpoints.up('md')]: {
-      width: drawerWidth,
+    width: drawerWidth,
+    [theme.breakpoints.down('md')]: {
+      width: 0,
     }
+  },
+  drawerPaper: {
+    width: drawerWidth,
   },
   drawerHeader: {
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
   logo: {
     display: "flex",
-    padding: theme.spacing(1, 1),
+    padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "center",
   },

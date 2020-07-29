@@ -7,22 +7,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 
 import Logo from "../../assets/images/logo.svg";
-
-const drawerWidth = 240;
-
-const useStyles = makeStyles(theme => ({
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth
-  }
-}));
+import useStyles from "./sidebar.style"
 
 export const SidebarItem = ({ key, label, icon: Icon, open, className, onClick, link, children = [] }) => {
   const classes = useStyles();
